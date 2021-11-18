@@ -369,6 +369,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="QDP-0D-ZEv" id="T60-gE-8lz"/>
                         <outlet property="linkTextField" destination="GXw-He-fjy" id="4oc-JM-MgO"/>
                         <outlet property="locationTextField" destination="0sj-Ee-txP" id="7z3-ad-LPl"/>
                         <segue destination="dto-Wx-OmZ" kind="show" identifier="showLocationSegue" id="tH4-OP-IbV"/>

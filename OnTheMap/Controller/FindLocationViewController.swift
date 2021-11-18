@@ -12,12 +12,14 @@ class FindLocationViewController: UIViewController {
 
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var linkTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func findLocationPressed(_ sender: UIButton) {
+        activityIndicator.startAnimating()
         getLocation(from: locationTextField.text ?? "") { location in
             if !(self.linkTextField.text?.isEmpty ?? false) {
                 if let location = location {
@@ -38,6 +40,7 @@ class FindLocationViewController: UIViewController {
     func getLocation(from address: String, completion: @escaping (_ location: CLLocationCoordinate2D?) -> Void) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { placemarks, error in
+            self.activityIndicator.stopAnimating()
             guard let placemarks = placemarks,
                   let location = placemarks.first?.location?.coordinate else {
                       completion(nil)
