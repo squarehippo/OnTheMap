@@ -68,7 +68,7 @@ class AddLocationViewController: UIViewController {
                 let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController")
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
             } else {
-                print("WHOOPS!")
+                self.createAlert(title: "Operation Failed", message: "Please try again later")
             }
         }
     }
@@ -76,8 +76,6 @@ class AddLocationViewController: UIViewController {
     @IBAction func cancelPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
-
 }
 
 private extension MKMapView {

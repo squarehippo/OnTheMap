@@ -35,7 +35,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         self.mapView.addAnnotation(currentStudent)
                     }
                 } else {
-                    //Alert data is currently unavaialbe
+                    self.createAlert(title: "Data Not Available", message: "Please try again later")
                 }
             }
         }

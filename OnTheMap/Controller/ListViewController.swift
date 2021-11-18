@@ -21,7 +21,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.students = data
                     self.tableView.reloadData()
                 } else {
-                    //Alert - data not available
+                    self.createAlert(title: "Data Not Available", message: "Please try again later")
                 }
             }
         }

@@ -47,19 +47,21 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func createAlert(title: String, message: String) {
-        let alertMessage = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertMessage.addAction(ok)
-        self.present(alertMessage, animated: true, completion: nil)
-    }
-    
-    
     @IBAction func signUpPressed(_ sender: UIButton) {
         if let url = URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com") {
             UIApplication.shared.open(url)
         }
     }
     
+}
+
+
+extension UIViewController {
+    func createAlert(title: String, message: String) {
+        let alertMessage = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertMessage.addAction(ok)
+        self.present(alertMessage, animated: true, completion: nil)
+    }
 }
 
