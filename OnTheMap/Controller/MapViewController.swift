@@ -21,7 +21,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         //self.title = "On The Map"
         
-        UdacityAPI.getStudentInformation { data, response, error in
+        UdacityAPI.getStudentLocations { data, response, error in
             DispatchQueue.main.async {
                 if let data = data {
                     self.students = data
@@ -29,11 +29,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         let studentLatitude = Double(student.latitude)
                         let studentLongitude = Double(student.longitude)
                         let currentStudent = MKPointAnnotation()
-                        currentStudent.title = student.firstName
+                        currentStudent.title = student.firstName + " " + student.lastName
                         currentStudent.subtitle = student.mediaURL
                         currentStudent.coordinate = CLLocationCoordinate2D(latitude: studentLatitude, longitude: studentLongitude)
                         self.mapView.addAnnotation(currentStudent)
                     }
+                } else {
+                    //Alert data is currently unavaialbe
                 }
             }
         }
@@ -72,7 +74,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
-        UdacityAPI.getStudentInformation { data, response, error in
+        UdacityAPI.getStudentLocations { data, response, error in
             DispatchQueue.main.async {
                 for annotation in self.mapView.annotations {
                     self.mapView.removeAnnotation(annotation)
@@ -83,7 +85,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         let studentLatitude = Double(student.latitude)
                         let studentLongitude = Double(student.longitude)
                         let currentStudent = MKPointAnnotation()
-                        currentStudent.title = student.firstName
+                        currentStudent.title = student.firstName + " " + student.lastName
                         currentStudent.subtitle = student.mediaURL
                         currentStudent.coordinate = CLLocationCoordinate2D(latitude: studentLatitude, longitude: studentLongitude)
                         self.mapView.addAnnotation(currentStudent)
@@ -96,6 +98,5 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func logoutPressed(_ sender: UIBarButtonItem) {
         UdacityAPI.logout()
     }
-    
     
 }

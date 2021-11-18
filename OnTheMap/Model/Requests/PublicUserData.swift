@@ -11,7 +11,7 @@ import Foundation
 // https://onthemap-api.udacity.com/v1/users/<user_id>
 
 
-struct GetPublicUserData: Codable {
+struct PublicUserData: Codable {
     let firstName: String
     let lastName: String
     let key: String

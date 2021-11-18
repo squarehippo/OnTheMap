@@ -10,19 +10,23 @@ import UIKit
 
 class UdacityAPI {
     
+    struct Auth {
+        static var accountId = ""
+    }
+    
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1/"
         case session
         case students
         case studentLocation
-        case userData(String)
+        case userData
         
         var stringValue: String {
             switch self {
             case .session: return Endpoints.base + "session"
             case .students: return Endpoints.base + "StudentLocation?limit=100&order=-updatedAt"
             case .studentLocation: return Endpoints.base + "StudentLocation"
-            case .userData(let userId): return Endpoints.base + "users/" + userId
+            case .userData: return Endpoints.base + "users/" + Auth.accountId
             }
         }
         
@@ -47,14 +51,12 @@ class UdacityAPI {
             let httpResponse = response as! HTTPURLResponse
             if httpResponse.statusCode == 200 {
                 let newData = data.subdata(in: 5..<data.count)
-                completion(true, httpResponse, nil)
                 UserDefaults.standard.set(true, forKey: UserDefaults.Keys.isLoggedIn.rawValue)
-                                
+                completion(true, httpResponse, nil)
                 let decoder = JSONDecoder()
                 do {
                     let userAccount = try decoder.decode(PostSessionResponse.self, from: newData)
-                    let userKey = userAccount.account.key
-                    UserDefaults.standard.set(userKey, forKey: UserDefaults.Keys.uniqueKey.rawValue)
+                    Auth.accountId = userAccount.account.key
                 } catch {
                     completion(false, httpResponse, error)
                 }
@@ -66,35 +68,35 @@ class UdacityAPI {
         task.resume()
     }
     
-    class func getStudentInformation(completion: @escaping ([StudentInformation]?, URLResponse?, Error?) -> Void) {
+    class func getStudentLocations(completion: @escaping ([StudentInformation]?, URLResponse?, Error?) -> Void) {
         let task = URLSession.shared.dataTask(with: Endpoints.students.url) { data, response, error in
             guard let data = data else {
                 completion(nil, response, error)
                 return
             }
-            //let newData = data.subdata(in: 5..<data.count)
             let decoder = JSONDecoder()
             do {
-                let studentInfo = try decoder.decode(PostStudentLocation.self, from: data)
-                completion(studentInfo.results, nil, nil)
+                let studentLocations = try decoder.decode(StudentLocationResponse.self, from: data)
+                completion(studentLocations.results, response, nil)
             } catch  {
-                print("Error", error)
+                completion(nil, response, error)
             }
         }
         task.resume()
     }
     
-    class func getUserInformation(userId: String, completion: @escaping (PublicUserData?, Error?) -> Void) {
-        let task = URLSession.shared.dataTask(with: Endpoints.userData(userId).url) { data, response, error in
+    class func getUserInformation(completion: @escaping (PublicUserDataResponse?, Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with: Endpoints.userData.url) { data, response, error in
             guard let data = data else {
                 return
             }
-            //print("GetUserInformation = ", String(data: data, encoding: .utf8))
             let newData = data.subdata(in: 5..<data.count)
             let decoder = JSONDecoder()
             do {
-                let userInfo = try decoder.decode(PublicUserData.self, from: data)
-                completion(userInfo, nil)
+                let userInfo = try decoder.decode(PublicUserDataResponse.self, from: newData)
+                DispatchQueue.main.async {
+                    completion(userInfo, nil)
+                }
             } catch  {
                 completion(nil, error)
             }
@@ -102,19 +104,26 @@ class UdacityAPI {
         task.resume()
     }
     
-    class func postStudentInformation(studentInfo: StudentInformation, completion: @escaping (Bool, URLResponse?, Error?) -> Void) {
+    class func postStudentLocation(studentInfo: PostStudentLocation, completion: @escaping (PostStudentLocationResponse?, Error?) -> Void) {
         var request = URLRequest(url: Endpoints.studentLocation.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        //request.httpBody = Data(studentInfo
+        let encoder = JSONEncoder()
+        request.httpBody = try! encoder.encode(studentInfo)
        
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-          if error != nil {
-              // Handle error…
-              return
-          }
-          print(String(data: data!, encoding: .utf8)!)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                do {
+                    let response = try JSONDecoder().decode(PostStudentLocationResponse.self, from: data)
+                    DispatchQueue.main.async {
+                        completion(response, nil)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
+                }
+            }
         }
         task.resume()
     }

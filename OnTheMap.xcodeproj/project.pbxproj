@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		424504AC2736FA3D006E7F65 /* PostStudentLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424504AB2736FA3D006E7F65 /* PostStudentLocationResponse.swift */; };
 		424504AF27382F01006E7F65 /* PostSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424504AE27382F01006E7F65 /* PostSessionResponse.swift */; };
-		424504B1273A38E4006E7F65 /* GetPublicUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424504B0273A38E4006E7F65 /* GetPublicUserData.swift */; };
+		424504B1273A38E4006E7F65 /* PublicUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424504B0273A38E4006E7F65 /* PublicUserData.swift */; };
 		424504B3273D700D006E7F65 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424504B2273D700D006E7F65 /* Notes.swift */; };
 		424504B6273D70AE006E7F65 /* UserDefaults+helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424504B5273D70AE006E7F65 /* UserDefaults+helper.swift */; };
 		424504B8273D7D83006E7F65 /* DeleteSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424504B7273D7D83006E7F65 /* DeleteSessionResponse.swift */; };
@@ -24,7 +24,7 @@
 		42944E392743077B00D2906E /* PutStudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42944E382743077B00D2906E /* PutStudentLocation.swift */; };
 		42944E3B274308A600D2906E /* PostSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42944E3A274308A600D2906E /* PostSession.swift */; };
 		42944E3D2743119100D2906E /* GetPublicUserDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42944E3C2743119100D2906E /* GetPublicUserDataResponse.swift */; };
-		42944E3F274324B600D2906E /* GetStudentLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42944E3E274324B600D2906E /* GetStudentLocationResponse.swift */; };
+		42944E3F274324B600D2906E /* StudentLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42944E3E274324B600D2906E /* StudentLocationResponse.swift */; };
 		42A7B691272C720D00BFFA1A /* PostStudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A7B690272C720D00BFFA1A /* PostStudentLocation.swift */; };
 		42CE9FFD273384980047EF33 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CE9FFC273384980047EF33 /* AddLocationViewController.swift */; };
 		42F06E2D273211D0005DFE75 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F06E2C273211D0005DFE75 /* ListViewController.swift */; };
@@ -34,7 +34,7 @@
 /* Begin PBXFileReference section */
 		424504AB2736FA3D006E7F65 /* PostStudentLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStudentLocationResponse.swift; sourceTree = "<group>"; };
 		424504AE27382F01006E7F65 /* PostSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSessionResponse.swift; sourceTree = "<group>"; };
-		424504B0273A38E4006E7F65 /* GetPublicUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPublicUserData.swift; sourceTree = "<group>"; };
+		424504B0273A38E4006E7F65 /* PublicUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicUserData.swift; sourceTree = "<group>"; };
 		424504B2273D700D006E7F65 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		424504B5273D70AE006E7F65 /* UserDefaults+helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+helper.swift"; sourceTree = "<group>"; };
 		424504B7273D7D83006E7F65 /* DeleteSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSessionResponse.swift; sourceTree = "<group>"; };
@@ -51,7 +51,7 @@
 		42944E382743077B00D2906E /* PutStudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutStudentLocation.swift; sourceTree = "<group>"; };
 		42944E3A274308A600D2906E /* PostSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSession.swift; sourceTree = "<group>"; };
 		42944E3C2743119100D2906E /* GetPublicUserDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPublicUserDataResponse.swift; sourceTree = "<group>"; };
-		42944E3E274324B600D2906E /* GetStudentLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStudentLocationResponse.swift; sourceTree = "<group>"; };
+		42944E3E274324B600D2906E /* StudentLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationResponse.swift; sourceTree = "<group>"; };
 		42A7B690272C720D00BFFA1A /* PostStudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStudentLocation.swift; sourceTree = "<group>"; };
 		42CE9FFC273384980047EF33 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		42F06E2C273211D0005DFE75 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 				424504AE27382F01006E7F65 /* PostSessionResponse.swift */,
 				424504B7273D7D83006E7F65 /* DeleteSessionResponse.swift */,
 				42944E3C2743119100D2906E /* GetPublicUserDataResponse.swift */,
-				42944E3E274324B600D2906E /* GetStudentLocationResponse.swift */,
+				42944E3E274324B600D2906E /* StudentLocationResponse.swift */,
 				424504AB2736FA3D006E7F65 /* PostStudentLocationResponse.swift */,
 			);
 			path = Response;
@@ -149,7 +149,7 @@
 			children = (
 				42944E3A274308A600D2906E /* PostSession.swift */,
 				42A7B690272C720D00BFFA1A /* PostStudentLocation.swift */,
-				424504B0273A38E4006E7F65 /* GetPublicUserData.swift */,
+				424504B0273A38E4006E7F65 /* PublicUserData.swift */,
 				42944E382743077B00D2906E /* PutStudentLocation.swift */,
 			);
 			path = Requests;
@@ -228,9 +228,9 @@
 			files = (
 				42A7B691272C720D00BFFA1A /* PostStudentLocation.swift in Sources */,
 				424504B3273D700D006E7F65 /* Notes.swift in Sources */,
-				42944E3F274324B600D2906E /* GetStudentLocationResponse.swift in Sources */,
+				42944E3F274324B600D2906E /* StudentLocationResponse.swift in Sources */,
 				424504B6273D70AE006E7F65 /* UserDefaults+helper.swift in Sources */,
-				424504B1273A38E4006E7F65 /* GetPublicUserData.swift in Sources */,
+				424504B1273A38E4006E7F65 /* PublicUserData.swift in Sources */,
 				424931D727247D4600105F7E /* UdacityAPI.swift in Sources */,
 				424504AF27382F01006E7F65 /* PostSessionResponse.swift in Sources */,
 				424931D327246B4500105F7E /* LoginViewController.swift in Sources */,

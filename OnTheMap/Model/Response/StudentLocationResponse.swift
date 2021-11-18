@@ -26,7 +26,7 @@ import Foundation
 //}
 
 
-struct PostStudentLocation: Codable {
+struct StudentLocationResponse: Codable {
     var results: [StudentInformation]
 }
 

@@ -9,47 +9,68 @@ import UIKit
 import MapKit
 
 class AddLocationViewController: UIViewController {
-
+    
+    @IBOutlet weak var studentNameLabel: UILabel!
+    @IBOutlet weak var studentURLLabel: UILabel!
+    @IBOutlet weak var latitudeLabel: UILabel!
+    @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    
     var location: CLLocationCoordinate2D!
     var mediaLink: String!
     var mapString: String!
-    var uniqueKey = UserDefaults.standard.string(forKey: UserDefaults.Keys.uniqueKey.rawValue)!
-    var userFirstName = UserDefaults.standard.string(forKey: UserDefaults.Keys.firstName.rawValue) ?? ""
-    var userLastName = UserDefaults.standard.string(forKey: UserDefaults.Keys.lastName.rawValue) ?? ""
+    var userFirstName: String?
+    var userLastName: String?
+    var uniqueKey: String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("This key is: ", uniqueKey)
-        UdacityAPI.getUserInformation(userId: uniqueKey) { data, error in
-            //print("UserData from Add Location = ", data)
-        }
-
+        
         let currentLatitude = location.latitude
         let currentLongitude = location.longitude
         let currentLocation = CLLocation(latitude: currentLatitude, longitude: currentLongitude)
         mapView.centerToLocation(currentLocation)
         
-        let newPin = MKPointAnnotation()
-        newPin.title = userFirstName
-        //newPin.subtitle = student.mediaURL
-        newPin.coordinate = location
-        self.mapView.addAnnotation(newPin)
+        UdacityAPI.getUserInformation { [self] user, error in
+            if let user = user {
+                userFirstName = user.firstName
+                userLastName = user.lastName
+                uniqueKey = user.uniqueKey
+                
+                let newPin = MKPointAnnotation()
+                newPin.title = user.firstName
+                newPin.coordinate = self.location
+                self.mapView.addAnnotation(newPin)
+                
+                self.studentNameLabel.text = userFirstName! + " " + userLastName!
+                self.studentURLLabel.text = mediaLink
+                self.latitudeLabel.text = "\(currentLatitude)"
+                self.longitudeLabel.text = "\(currentLongitude)"
+            }
+        }
     }
     
     
-    
     @IBAction func addLocationPressed(_ sender: UIButton) {
-        let newPinInformation = PublicUserData(
-            uniqueKey: uniqueKey,
-            firstName: userFirstName,
-            lastName: userLastName,
+        let newPinInformation = PostStudentLocation(
+            uniqueKey: uniqueKey ?? "",
+            firstName: userFirstName ?? "",
+            lastName: userLastName ?? "",
             mapString: mapString,
             mediaURL: mediaLink,
             latitude: location.latitude,
             longitude: location.longitude
             )
-        //UdacityAPI.postStudentInformation(completion: )
+        UdacityAPI.postStudentLocation(studentInfo: newPinInformation) { data, error in
+            if data != nil {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController")
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+            } else {
+                print("WHOOPS!")
+            }
+        }
     }
     
     @IBAction func cancelPressed(_ sender: UIButton) {

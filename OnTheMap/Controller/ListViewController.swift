@@ -15,13 +15,13 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       //self.title = "On The Map"
-
-        UdacityAPI.getStudentInformation { data, response, error in
+        UdacityAPI.getStudentLocations { data, response, error in
             DispatchQueue.main.async {
                 if let data = data {
                     self.students = data
                     self.tableView.reloadData()
+                } else {
+                    //Alert - data not available
                 }
             }
         }
@@ -47,7 +47,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func refreshButtonPressed(_ sender: UIBarButtonItem) {
-        UdacityAPI.getStudentInformation { data, response, error in
+        UdacityAPI.getStudentLocations { data, response, error in
             DispatchQueue.main.async {
                 if let data = data {
                     self.students = data
